@@ -29,5 +29,16 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Container') {
+            steps {
+                script {
+                     withDockerRegistry(credentialsId: 'dockerHub_cred', toolName: 'docker') {
+                        sh "docker stop demoapp || true"
+                        sh "docker rm demoapp || true"
+                        sh "docker run -d --name demoapp -p 9090:9090 ahmed0987/demoapp:latest"
+                    }   
+                }
+            }
+        }
     }
 }
