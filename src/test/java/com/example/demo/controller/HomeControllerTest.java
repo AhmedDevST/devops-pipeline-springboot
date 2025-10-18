@@ -18,6 +18,6 @@ public class HomeControllerTest {
     public void testHome() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello to My Spring Boot App!"));
+                .andExpect(content().string("Hi to My Spring Boot App!"));
     }
 }

@@ -8,6 +8,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "Hello to My Spring Boot App!";
+        return "Hi to My Spring Boot App!";
     }
 }
