@@ -21,7 +21,7 @@ pipeline {
         stage('Build & Push Docker Image') {
             steps { 
                 script{
-                    withDockerRegistry(toolName: 'docker') {
+                    withDockerRegistry(credentialsId: 'dockerHub_cred', toolName: 'docker') {
                         sh "docker build -t demoApp: latest -f docker/Dockerfile "
                         sh "docker tag shopping: latest ahmed0987/demoApp:latest" 
                         sh "docker push ahmed0987/shopping:latest"
