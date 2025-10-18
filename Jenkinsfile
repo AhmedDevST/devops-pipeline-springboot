@@ -22,7 +22,7 @@ pipeline {
             steps { 
                 script {
                     withDockerRegistry(credentialsId: 'dockerHub_cred', toolName: 'docker') {
-                        sh "docker build -t demoapp:latest -f docker/Dockerfile ."
+                        sh "docker build -t demoapp:latest -f Dockerfile ."
                         sh "docker tag demoapp:latest ahmed0987/demoapp:latest"
                         sh "docker push ahmed0987/demoapp:latest"
                     }
