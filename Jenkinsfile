@@ -17,9 +17,16 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t demo-app .'
+        
+        stage('Build & Push Docker Image') {
+            steps { 
+                script{
+                    withDockerRegistry(toolName: 'docker') {
+                        sh "docker build -t demoApp: latest -f docker/Dockerfile "
+                        sh "docker tag shopping: latest ahmed0987/demoApp:latest" 
+                        sh "docker push ahmed0987/shopping:latest"
+                      }
+                }
             }
         }
     }
