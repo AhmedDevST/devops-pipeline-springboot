@@ -9,6 +9,9 @@ pipeline {
         // Poll GitHub every 5 minutes
         pollSCM('H/5 * * * *')
     }
+     environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
     stages {
         stage('checkout') {
             steps {
@@ -20,7 +23,19 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        
+       stage("Sonarqube Analysis") {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                            sh '''
+                $SCANNER_HOME/bin/sonar-scanner \
+                  -Dsonar.projectName=demo_sonar \
+                  -Dsonar.projectKey=demo_sonar \
+                  -Dsonar.java.binaries=.
+                '''
+                }
+            }
+        }
+
         stage('Build & Push Docker Image') {
             steps { 
                 script {
