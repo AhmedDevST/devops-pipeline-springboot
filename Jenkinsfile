@@ -5,7 +5,10 @@ pipeline {
         jdk 'jdk17'
         maven 'maven3'
     }
-
+    triggers {
+        // Poll GitHub every 5 minutes
+        pollSCM('H/5 * * * *')
+    }
     stages {
         stage('checkout') {
             steps {
