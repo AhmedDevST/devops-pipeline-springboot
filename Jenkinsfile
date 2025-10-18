@@ -5,13 +5,10 @@ pipeline {
         jdk 'jdk17'
         maven 'maven3'
     }
-
+ triggers {
+        pollSCM('* * * * *')
+    }
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Build with Maven') {
             steps {
                 sh 'mvn clean package'
