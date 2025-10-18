@@ -5,10 +5,13 @@ pipeline {
         jdk 'jdk17'
         maven 'maven3'
     }
- triggers {
-        pollSCM('* * * * *')
-    }
+
     stages {
+        stage('checkout') {
+            steps {
+                git credentialsId: 'jen_dock_git', url: 'https://github.com/AhmedDevST/devops-pipeline-springboot'
+            }
+        }
         stage('Build with Maven') {
             steps {
                 sh 'mvn clean package'
