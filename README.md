@@ -191,5 +191,3 @@ Removes local images to free disk space
 
 ![Jenkins Pipeline](./docs/images/jenkins-pipeline-view.png)
 *Complete pipeline execution showing all stages*
-
-```
